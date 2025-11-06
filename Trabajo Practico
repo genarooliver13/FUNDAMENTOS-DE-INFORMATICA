@@ -1,0 +1,292 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/genarooliver13/FUNDAMENTOS-DE-INFORMATICA/blob/main/Trabajo%20Practico\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "81ccb7e4",
+      "metadata": {
+        "id": "81ccb7e4"
+      },
+      "source": [
+        "# TRABAJO PRÁCTICO FINAL - FUNDAMENTOS DE INFORMÁTICA\n",
+        "## Ingeniería Civil - UTN FRVM - 2025\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## INFORMACIÓN GENERAL\n",
+        "\n",
+        "**Fecha de entrega:** 18 de noviembre de 2025, 22:00h.\n",
+        "\n",
+        "**Modalidad:** Individual o grupal (hasta 4 integrantes).\n",
+        "\n",
+        "**Inscripción:** Completar la planilla del link, indicar:\n",
+        "- Integrantes del grupo\n",
+        "- Nivel de complejidad elegido\n",
+        "\n",
+        "Planilla: https://docs.google.com/spreadsheets/d/1lJctQ7c2XPMd8RO41MQBjpQfGZ4PYn0QzlIaHOa0FS8/edit?usp=sharing\n",
+        "\n",
+        "Quien quiera hacerlo en grupo y no tenga compañero, anotarse en la sección “Sin compañero”.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## SISTEMA DE EVALUACIÓN\n",
+        "\n",
+        "El trabajo práctico tiene 3 niveles de complejidad:\n",
+        "\n",
+        "| Nivel | Nota máxima |\n",
+        "|-------|-------------|\n",
+        "| **Nivel 1** | 6 |\n",
+        "| **Nivel 2** | 8 |\n",
+        "| **Nivel 3** | 10 |\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## TEMÁTICA: ANÁLISIS ESTRUCTURAL Y GESTIÓN DE OBRA CIVIL EN VILLA MARÍA\n",
+        "\n",
+        "### Introducción\n",
+        "La municipalidad de Villa María comenzó un proyecto de renovación de la infraestructura urbana que incluye:\n",
+        "- Construcción de un nuevo puente sobre el río Ctalamochita, en barrio Palermo.\n",
+        "- Repavimentación de calles\n",
+        "- Análisis de desagües pluviales\n",
+        "\n",
+        "El equipo de ingenieros de la dirección de obras públicas de la municipalidad debe desarrollar un sistema informático para analizar y gestionar estos proyectos.\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "48d026ae",
+      "metadata": {
+        "id": "48d026ae"
+      },
+      "source": [
+        "## ENUNCIADOS POR NIVEL\n",
+        "\n",
+        "### **NIVEL 1 - CÁLCULOS BÁSICOS DE INGENIERÍA** (Nota máxima: 6)\n",
+        "\n",
+        "Desarrollar un programa que realice cálculos básicos para el proyecto de infraestructura:\n",
+        "\n",
+        "#### Para trabajos de 1 persona:\n",
+        "1. **Cálculo de materiales del puente:**\n",
+        "   - Solicitar al usuario las dimensiones del puente (largo, ancho, altura de capa de losa, medidas de los pilares y cantidad). Hacer con método input.\n",
+        "   - Calcular volumen de hormigón necesario (considerar losa y pilares)\n",
+        "   - Calcular cantidad de acero de refuerzo (usar 150 kg/m³ de hormigón)\n",
+        "   - Mostrar el costo estimado (Hormigón: $85.000/m³, Acero: $1.200/kg)\n",
+        "\n",
+        "2. **Análisis de precipitaciones:** (usar archivo \"datos_climaticos_villa_maria.csv\")\n",
+        "   - Crear una lista con los datos de precipitación mensual de Villa María del último año\n",
+        "   - Calcular precipitación promedio, máxima y mínima\n",
+        "   - Identificar meses con precipitación superior al promedio\n",
+        "   - Usar estructuras if/elif/else para clasificar meses según riesgo de inundación. Establecer tres umbrales, para riesgo bajo, medio y alto.\n",
+        "\n",
+        "3. **Planificación de pavimentación:** (usar archivo \"calles_pavimentacion.csv\")\n",
+        "   - Crear un diccionario con calles a pavimentar y sus longitudes\n",
+        "   - Calcular superficie total a pavimentar\n",
+        "   - Determinar cantidad de asfalto necesario (espesor: 5 cm)\n",
+        "\n",
+        "#### Para grupos de 2-3 personas:\n",
+        "**Agregar a los puntos anteriores:**\n",
+        "\n",
+        "4. **Sistema de alertas climáticas:**(usar archivo \"ensayos_probetas_hormigon.csv\")\n",
+        "   - Crear una código que contenga tres variables de ajuste: temperatura_max, humedad_max y viento_max. Los valores de cada variable pueden inventarlos o hallarlos de alguna fuente\n",
+        "   - El usuario debe ingresar los valores reales el programa debe determinar si las condiciones son aptas para hormigonar\n",
+        "   - Debe generar recomendaciones según las condiciones, por ejemplo, \"La temperatura es demasiado alta para hormigonar\"\n",
+        "\n",
+        "#### Para grupos de 4 personas:\n",
+        "**Agregar a todos los puntos anteriores:**\n",
+        "\n",
+        "5. **Análisis comparativo de materiales:**\n",
+        "   - Comparar diferentes tipos de hormigón y sus propiedades\n",
+        "   - Evaluar relación costo-beneficio\n",
+        "   - Generar recomendación automática según los requerimientos\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Cálculo de materiales para un puente\n",
+        "\n",
+        "# Solicitud de datos\n",
+        "largo_puente = float(input(\"Ingresá el largo del puente (m): \"))\n",
+        "ancho_puente = float(input(\"Ingresá el ancho del puente (m): \"))\n",
+        "espesor_losa = float(input(\"Ingresá el espesor de la losa (m): \"))\n",
+        "base_pilar = float(input(\"Ingresá la base del pilar (m): \"))\n",
+        "alto_pilar = float(input(\"Ingresá la altura del pilar (m): \"))\n",
+        "cant_pilares = int(input(\"Ingresá la cantidad de pilares: \"))\n",
+        "\n",
+        "# Cálculo de volúmenes\n",
+        "volumen_losa = largo_puente * ancho_puente * espesor_losa\n",
+        "volumen_pilares = cant_pilares * base_pilar * base_pilar * alto_pilar\n",
+        "volumen_total = volumen_losa + volumen_pilares\n",
+        "\n",
+        "# Cálculo de acero (150 kg por m³ de hormigón)\n",
+        "acero_total = volumen_total * 150  # en kg\n",
+        "\n",
+        "# Costos\n",
+        "costo_hormigon_m3 = 85000  # $/m³\n",
+        "costo_acero_kg = 1.200    # $/kg\n",
+        "\n",
+        "# Cálculo de costos\n",
+        "costo_total_hormigon = volumen_total * costo_hormigon_m3\n",
+        "costo_total_acero = acero_total * costo_acero_kg\n",
+        "costo_total = costo_total_hormigon + costo_total_acero\n",
+        "\n",
+        "# Resultados\n",
+        "print(\"\\n=== RESULTADOS ===\")\n",
+        "print(f\"Volumen total de hormigón: {volumen_total:.2f} m³\")\n",
+        "print(f\"Cantidad total de acero: {acero_total:.2f} kg\")\n",
+        "print(f\"Costo estimado de hormigón: ${costo_total_hormigon:,.2f}\")\n",
+        "print(f\"Costo estimado de acero: ${costo_total_acero:,.2f}\")\n",
+        "print(f\"💰 Costo total estimado: ${costo_total:,.2f}\")\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "eMRckk2icuZm",
+        "outputId": "ab1c1aa5-9b0a-46db-b86a-8340f610e435",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "id": "eMRckk2icuZm",
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=== Cálculo de materiales del puente ===\n",
+            "Ingresá el largo del puente (m): 150\n",
+            "Ingresá el ancho del puente (m): 50\n",
+            "Ingresá el espesor de la losa (m): 0.2\n",
+            "Ingresá la base del pilar (m): 30\n",
+            "Ingresá la altura del pilar (m): 45\n",
+            "Ingresá la cantidad de pilares: 12\n",
+            "\n",
+            "=== RESULTADOS ===\n",
+            "Volumen total de hormigón: 487500.00 m³\n",
+            "Cantidad total de acero: 73125000.00 kg\n",
+            "Costo estimado de hormigón: $585,000,000.00\n",
+            "Costo estimado de acero: $87,750,000.00\n",
+            "💰 Costo total estimado: $672,750,000.00\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "6c70fb70",
+      "metadata": {
+        "id": "6c70fb70"
+      },
+      "source": [
+        "### **NIVEL 2 - SISTEMA DE GESTIÓN DE PROYECTOS** (Nota máxima: 8)\n",
+        "\n",
+        "Incluye todo lo del Nivel 1 más:\n",
+        "\n",
+        "#### Para grupos de 1-2 persona:\n",
+        "1. **Funcion de cálculo estructural:**\n",
+        "   - Crear una función (`dimensionar_zapata()`) para dimensionar una zapata según la carga y el tipo de suelo, usando datos del archivo ensayos_suelo.csv.\n",
+        "   #### Parámetros de entrada:\n",
+        "- `carga_columna`: float (kN) - carga de la columna\n",
+        "- `punto_muestreo`: string (ej: 'P1', 'P2'...'P7') - del archivo CSV\n",
+        "- `profundidad_deseada`: float (metros) - profundidad de fundación\n",
+        "- `forma`: string ('cuadrada' o 'rectangular')\n",
+        "- `relacion_lados`: float - para rectangular (largo/ancho), 1.0 para cuadrada\n",
+        "\n",
+        "2. **Gestión de archivos de proyecto:**\n",
+        "   - Leer archivo CSV con datos de ensayos de suelo de Villa María\n",
+        "    - Hacer un programa que permita ingresar un punto de muestreo y un valor de resistencia, y que tenga como salida el valor de profundidad mínino que se debe alcanzar para dicha resistencia.\n",
+        "    - Paracada punto de muestreo, calcular la humedad promedio.\n",
+        "   - Guardar resultados en archivo de texto con formato de informe\n",
+        "\n",
+        "\n",
+        "#### Para grupos de 3-4 personas:\n",
+        "**Agregar a los puntos anteriores:**\n",
+        "\n",
+        "4. **Sistema de control de calidad:**\n",
+        "   - Crear una funcion que permita ingresar un material y que el programa imprima una lista deproveedores y su número de teléfono.\n",
+        "   Como parámetro de entrada, se podrá seleccionar que priorizar, mejor calidad, mejor precio unitario o menor distancia.\n",
+        "   - Realizar un análisis estadístico de resistencia del hormigón. Utilizar el dataset de resultados de ensayos de probetas\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "6783f77d",
+      "metadata": {
+        "id": "6783f77d"
+      },
+      "source": [
+        "### **NIVEL 3 - ANÁLISIS AVANZADO CON PANDAS** (Nota máxima: 10)\n",
+        "\n",
+        "Incluye todo lo del Nivel 2 más:\n",
+        "\n",
+        "1. **Análisis de datos históricos con Pandas:**\n",
+        "   - Cargar dataset con registros de Préstamos de la Biblioteca Municipal.\n",
+        "\n",
+        "   Link: https://datos.villamaria.gob.ar/datasets/prestamos-de-la-biblioteca-municipal\n",
+        "   * Realizar un anking de libros más prestados por año\n",
+        "   * Obtener cuantos libros distintos hay\n",
+        "   * Que autor tiene mas libros?\n",
+        "   * Crear gráficos que muestren la distribución por edad de los usuarios\n",
+        "   * Crear gráficos que muesten la cantidad de prestamos según el día de la semana, el mes y el año.\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "59379489",
+      "metadata": {
+        "id": "59379489"
+      },
+      "source": [
+        "## REQUISITOS DE ENTREGA\n",
+        "\n",
+        "1. **Código fuente:** Archivo .ipynb comentando el código y con celdas en markdown explicando lo realizado\n",
+        "3. **Datasets:** Archivos de datos utilizados (si los modificaron por alguna razón)\n",
+        "4. **Informe:** En el notebook, contemplar (solo a modo de guía):\n",
+        "   - Descripción del problema\n",
+        "   - Metodología utilizada\n",
+        "   - Resultados obtenidos\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## CRITERIOS DE EVALUACIÓN\n",
+        "\n",
+        "- **Documento.pynb** (70%)\n",
+        "- **Defensa oral** (30%)\n",
+        "\n",
+        "En la defensa oral se hará una pregunta simple a cada estudiante sobre lo realizado."
+      ]
+    }
+  ],
+  "metadata": {
+    "language_info": {
+      "name": "python"
+    },
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
